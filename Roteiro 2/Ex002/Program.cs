@@ -9,10 +9,10 @@ Use propriedades (get e set) para:
 velocidade.
 */
 
-public class Carro
+class Carro
 {
     private string _modelo;
-    private int _velocidadeAtual;
+    private int _velocidadeAtual = 0;
 
     public Carro(string modelo)
     {
@@ -24,16 +24,35 @@ public class Carro
         get{return _velocidadeAtual;}
         private set
         {
-            if(value >= 0)
-            {
-                _velocidadeAtual = value;
-            }
-            else
-            {
-                _velocidadeAtual = 0;
-            }
+            if(value >= 0) _velocidadeAtual = value;
         }
     }
 
+    public int Acelerar(int valor)
+    {
+        VelocidadeAtual += valor;
+        return VelocidadeAtual;
+    }
+    
+    public int Frear(int valor)
+    {
+        if (valor <= VelocidadeAtual) VelocidadeAtual -= valor;
+        else VelocidadeAtual = 0;
+        return VelocidadeAtual;
+    }
+}
 
+
+class Program
+{
+    public static void Main()
+    {
+        Carro c1 = new Carro("Ferrari");
+        c1.Acelerar(80);
+        Console.WriteLine($"Velocidade atual: {c1.VelocidadeAtual}");
+        c1.Frear(20);
+        Console.WriteLine($"Velocidade atual: {c1.VelocidadeAtual}");
+        c1.Frear(70);
+        Console.WriteLine($"Velocidade atual: {c1.VelocidadeAtual}");
+    }
 }
